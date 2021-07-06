@@ -11,7 +11,11 @@
         </div>
         <div>
           <% if current_user == micropost.user %>
-            <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+          <!--削除ボタン-->
+            <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
+          <% else %>
+            <%=render 'favorites/like_button', micropost: micropost %>
+            <!--render 'パーシャルのパス, パーシャルで使う変数名: 渡す値'-->
           <% end %>
         </div>
       </div>
@@ -19,3 +23,5 @@
   <% end %>
   <%= paginate microposts %>
 </ul>
+
+ <!--micropostの共通のView パーシャル-->

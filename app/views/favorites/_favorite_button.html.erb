@@ -1,0 +1,25 @@
+ <%# コメントアウト　%>
+  <% if current_user.favorited_by?(user) %>
+    <%= form_with(model: current_user.favorites.find_by(user_id: @current_user.id), local: true, method: :delete) do |f| %>
+      <%= hidden_field_tag :micropost_id %>
+      <%= f.submit 'Unfollow', class: 'btn btn-danger btn-block' %>
+    <% end %>
+  <% else %>
+    <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
+      <%= hidden_field_tag :micropost_id %>
+      <%= f.submit 'Favorite', class: 'btn btn-primary btn-sm' %>
+    <% end %>
+  <% end %>
+
+
+<% if !Favorite.exists?(user_id: current_user.id, micropost_id: micropost.id) %>
+  <%= link_to micropost_favorites_path(micropost), method: :post, remote: true do %>
+    <!--<i class="far fa-star"></i>-->
+  <% end %>
+  <span class="star-count1"><%= micropost.favorites.count %></span>
+<% else %>
+  <%= link_to micropost_favorites_path(micropost), method: :delete, remote: true do %>
+    <!--<i class="fas fa-star"></i>-->
+  <% end %>
+  <!--<span class="star-count2"><%= micropost.favorites.count %></span>-->
+<% end %>

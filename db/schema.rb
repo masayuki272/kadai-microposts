@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2021_06_18_022925) do
-
+  
   create_table "microposts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "content"
     t.bigint "user_id"
@@ -37,8 +37,33 @@ ActiveRecord::Schema.define(version: 2021_06_18_022925) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+  
+  create_table "favorites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "micropost_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["micropost_id"], name: "index_favorites_on_micropost_id", using: :btree
+    t.index ["user_id", "micropost_id"], name: "index_favorites_on_user_id_and_micropost_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_favorites_on_user_id", using: :btree
+  end
+  
+  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "like_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["like_id"], name: "index_likes_on_like_id", using: :btree
+    t.index ["user_id", "like_id"], name: "index_likes_on_user_id_and_like_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
+  end
 
   add_foreign_key "microposts", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
+
+  add_foreign_key "favorites", "microposts"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "likes", "users"
+  add_foreign_key "likes", "users", column: "like_id"
 end

@@ -10,9 +10,13 @@ Rails.application.routes.draw do
     member do
       get :followings
       get :followers
+      get :likes
     end
   end
 
   resources :microposts, only: [:create, :destroy]
+# ログインユーザーがフォロー、アンフォローできるようにするルーティング
   resources :relationships, only: [:create, :destroy]
+# ログインユーザがお気に入りを登録できる[m
+  resources :favorites, only: [:create, :destroy]
 end
