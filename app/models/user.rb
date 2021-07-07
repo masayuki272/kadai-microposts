@@ -16,7 +16,7 @@ class User < ApplicationRecord
 # 自分をフォローしているUser達を取得
   has_many :followers, through: :reverses_of_relationship, source: :user
 # 自分がフォローしているUser達を取得
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
 # お気に入りをつけたmicropostを取得
   has_many :likes, through: :favorites, source: :micropost
 # 中間テーブルを経由して相手の情報を取得できるようにするためには'through'を使用する
