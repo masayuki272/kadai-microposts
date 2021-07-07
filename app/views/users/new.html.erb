@@ -1,12 +1,19 @@
 <div class="text-center">
   <h1>Sign up</h1>
 </div>
+<%# コメントアウト　%>
+      <%= form_with(model: @user, local: true) do |f| %> 
+        <%= render 'layouts/error_messages', model: f.object %>       
+      <% end %>
+
+
 
 <div class="row">
   <div class="col-sm-6 offset-sm-3">
 
+
     <%= form_with(model: @user, local: true) do |f| %>
-      
+
       <div class="form-group">
         <%= f.label :name, 'Name' %>
         <%= f.text_field :name, class: 'form-control' %>
@@ -28,10 +35,6 @@
       </div>
 
       <%= f.submit 'Sign up', class: 'btn btn-primary btn-block' %>
-<%# コメントアウト　%>
-      <%= form_with(model: @user, local: true) do |f| %> 
-        <%= render 'layouts/error_messages', model: f.object %>       
-      <% end %>
     <% end %>
   </div>
 </div>

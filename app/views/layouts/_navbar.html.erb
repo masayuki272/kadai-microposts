@@ -5,31 +5,31 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav">
         
       <!--ここから下が新規記述--上はBootstrapテンプレート>  
           
         <!--ログインできた場合-->
         <% if logged_in? %>
         <!--user一覧のリンクを実装-->
-          <li><%= link_to 'Users',users_path %></li>
-          <li><%= link_to 'My likes',likes_user_path(current_user)%></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
-             <ul class="dropdown-menu">
+          <li class="nav-item"><%= link_to 'Users', users_path, class: 'nav-link' %></li>
+          <li class="nav-uten"><%= link_to 'My likes',likes_user_path(current_user), class: 'nav-link' %></li>
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
+            <ul class="dropdown-menu dropdown-menu-right">
                <!--dropdown-menuを実装しその中にMy ProfileリンクとLogoutリンクを実装-->
-               <li><%= link_to 'My profile',user_path(current_user) %>&nbsp;</li>
-               <li role="separator" class="divider">&nbsp;</li>
-               <li><%= link_to 'Logout', logout_path, method: :delete %>&nbsp;</li>
-             </ul>
+              <li class="dropdown-item"><%= link_to 'My profile', user_path(current_user) %></li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-item"><%= link_to 'Logout', logout_path, method: :delete %></li>
+            </ul>
            </li>
            <!--ログインしていない or ログインできなかった場合-->
         <% else %>
           <!--Signupにリンクを付ける-->
-          <li><%= link_to 'Signup', signup_path %></li>
+          <li class="nav-item"><%= link_to 'Signup', signup_path, class: 'nav-link' %></li>
           <!--loginにリンクを付ける-->
-          <li><%= link_to 'login' , login_path %></li>
+          <li class="nav-item"><%= link_to 'Login', login_path, class: 'nav-link' %></li>
         <% end %>
       </ul>
     </div>
