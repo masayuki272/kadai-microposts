@@ -1,27 +1,26 @@
-<ul class="list-unstyled">
+<ul class="media-list">
   <% microposts.each do |micropost| %>
-    <li class="media mb-3">
+    <li class="media">
       <img class="mr-2 rounded" src="<%= gravatar_url(micropost.user, { size: 50 }) %>" alt="">
       <div class="media-body">
         <div>
           <%= link_to micropost.user.name, user_path(micropost.user) %> <span class="text-muted">posted at <%= micropost.created_at %></span>
         </div>
         <div>
-          <p class="mb-0"><%= micropost.content %></p>
+          <p><%= micropost.content %></p>
         </div>
         <div>
           <% if current_user == micropost.user %>
           <!--削除ボタン-->
             <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-xs' %>
-          <% else %>
-            <%=render 'favorites/like_button', micropost: micropost %>
-            <!--render 'パーシャルのパス, パーシャルで使う変数名: 渡す値'-->
           <% end %>
+          <%=render 'favorites/like_button', micropost: micropost %>
+            <!--render 'パーシャルのパス, パーシャルで使う変数名: 渡す値'-->
         </div>
       </div>
     </li>
   <% end %>
-  <%= paginate microposts %>
 </ul>
+<%= paginate microposts %>
 
  <!--micropostの共通のView パーシャル-->

@@ -3,10 +3,8 @@
   <ul class="media-list">
     <% users.each do |user| %>
     <li class ="media">
-      <div class="media-left">
-       <img class="media-object img-rounded" src="<%= gravatar_url(user, {size: 50}) %>" alt"">
-       <!--Gravatar メールアドレスに対して自分のアバター画像を登録するサービス-->
-      </div>
+      <img class="mr-2 rounded" src="<%= gravatar_url(user, { size: 50 }) %>" alt="">
+      <!--Gravatar メールアドレスに対して自分のアバター画像を登録するサービス-->
       <div class="media-body">
         <div>
           <%= user.name %>

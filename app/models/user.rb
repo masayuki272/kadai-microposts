@@ -43,19 +43,17 @@ class User < ApplicationRecord
   end
 
 # --------課題 お気に入りボタン--------  
-  def like(other_micropost)
-    unless self == other_micropost
-      self.favorites.find_or_create_by(micropost_id: other_micropost.id)
-    end
+  def like(micropost)
+    self.favorites.find_or_create_by(micropost_id: micropost.id)
   end
 
-  def unlike(other_micropost)
-    favorite = self.favorites.find_by(micropost_id: other_micropost.id)
+  def unlike(micropost)
+    favorite = self.favorites.find_by(micropost_id: micropost.id)
     favorite.destroy if favorite
   end
   
-  def like?(other_micropost)
-    self.likes.include?(other_micropost)
+  def like?(micropost)
+    self.likes.include?(micropost)
   end
 
 
